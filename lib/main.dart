@@ -4,8 +4,8 @@ import 'package:memories/authentication.dart';
 import 'package:memories/mapping.dart';
 
 void main() async{
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
   runApp(Memories());
 }
 
