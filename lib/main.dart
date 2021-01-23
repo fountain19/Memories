@@ -16,9 +16,7 @@ class Memories extends StatelessWidget {
     return MaterialApp(
       title: 'Memory App',
       theme: ThemeData(
-
         primarySwatch: Colors.pink,
-
       ),
       home: MappingPage(auth: Auth(),),
     );
