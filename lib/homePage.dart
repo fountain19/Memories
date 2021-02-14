@@ -17,7 +17,7 @@ import 'dialogBox.dart';
 
 class HomePage extends StatefulWidget  {
 
-  final AuthImplementation auth;
+  final Auth auth;
   final VoidCallback onSignedOut;
 
 
@@ -77,8 +77,10 @@ DatabaseReference postsRef= FirebaseDatabase.instance.reference().child("Posts")
       widget.onSignedOut();
 
     }catch(e){
-      dialogbox.information(context, 'Error', e.toString());
+      // dialogbox.information(context, 'Error', e.toString());
+      dialogbox.information(context, 'Help', 'Please click the back button from the top to safely exit the program ');
       print('Error = ' + e.toString());
+
     }
   }
   @override
@@ -87,7 +89,7 @@ DatabaseReference postsRef= FirebaseDatabase.instance.reference().child("Posts")
     return Scaffold(
 
       appBar: AppBar(
-   automaticallyImplyLeading: false,
+    //automaticallyImplyLeading: false,
         title: Text('Memories',style: TextStyle(
             fontWeight: FontWeight.bold,fontFamily: 'Signatra',fontSize: 45
         ),),
@@ -133,7 +135,7 @@ DatabaseReference postsRef= FirebaseDatabase.instance.reference().child("Posts")
     return GestureDetector(
       onTap:(){
         Navigator.push(context, MaterialPageRoute(builder: (context){
-          return ImageView(time,image,description,date,postId);
+          return ImageView(time,image,description,date,postId,);
         }));
       } ,
       child: Card(

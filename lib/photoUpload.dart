@@ -9,7 +9,10 @@ import 'package:intl/intl.dart';
 import 'package:memories/homePage.dart';
 import 'package:uuid/uuid.dart';
 
+import 'authentication.dart';
+
 class UploadPhotoPage extends StatefulWidget {
+
   @override
   _UploadPhotoPageState createState() => _UploadPhotoPageState();
 }
@@ -17,6 +20,7 @@ class UploadPhotoPage extends StatefulWidget {
 class _UploadPhotoPageState extends State<UploadPhotoPage> {
   // firebase_storage.FirebaseStorage storage =
   //     firebase_storage.FirebaseStorage.instance;
+
   File sampleImage;
   final formKey= GlobalKey<FormState>();
   String _myValue;

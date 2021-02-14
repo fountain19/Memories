@@ -3,14 +3,17 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:memories/homePage.dart';
 
+import 'authentication.dart';
+
 
 class ImageView extends StatefulWidget {
+
   final String date;
   final String time;
   final String description;
   final String image;
   final String postId;
-  ImageView(this.time,this.image,this.description,this.date, this.postId );
+  ImageView(this.time,this.image,this.description,this.date, this.postId, );
   @override
   _ImageViewState createState() => _ImageViewState();
 }
@@ -46,29 +49,31 @@ class _ImageViewState extends State<ImageView> {
         margin: EdgeInsets.all(15.0),
         child: Container(
           padding: EdgeInsets.all(14.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.date,style: Theme.of(context).textTheme.subtitle1,
-                    textAlign: TextAlign.center,
-                  ),
-                  Text(
-                    widget.time,style: Theme.of(context).textTheme.subtitle1,
-                    textAlign: TextAlign.center,
-                  ),
-                ],),
-              SizedBox(height: 10.0,),
-              Container(child: Image.network(widget.image,fit: BoxFit.cover,)),
-              SizedBox(height: 10.0,),
-              Text(
-                widget.description,style: Theme.of(context).textTheme.subtitle2,
-                textAlign: TextAlign.center,
-              ),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      widget.date,style: Theme.of(context).textTheme.subtitle1,
+                      textAlign: TextAlign.center,
+                    ),
+                    Text(
+                      widget.time,style: Theme.of(context).textTheme.subtitle1,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],),
+                SizedBox(height: 10.0,),
+                Container(child: Image.network(widget.image,fit: BoxFit.cover,)),
+                SizedBox(height: 10.0,),
+                Text(
+                  widget.description,style: Theme.of(context).textTheme.subtitle2,
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
           ),
         ),
       ),
