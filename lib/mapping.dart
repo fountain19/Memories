@@ -16,7 +16,7 @@ notSignIn,
 }
 
 class _MappingPageState extends State<MappingPage> {
-
+String userId;
   AuthStatus authStatus=AuthStatus.notSignIn;
 
   @override
@@ -42,13 +42,14 @@ class _MappingPageState extends State<MappingPage> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     switch(authStatus){
       case AuthStatus.notSignIn:
         return LoginRegisterPage(auth: widget.auth,onSignedIn:_signedIn ,);
       case AuthStatus.signedIn:
-        return HomePage(auth: widget.auth,onSignedOut:_signOut ,);
+        return HomePage(auth: widget.auth,onSignedOut:_signOut,);
 
     }
 

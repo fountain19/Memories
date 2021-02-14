@@ -1,12 +1,13 @@
 
 import 'dart:io';
-// import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:memories/homePage.dart';
+import 'package:uuid/uuid.dart';
 
 class UploadPhotoPage extends StatefulWidget {
   @override
@@ -20,6 +21,12 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
   final formKey= GlobalKey<FormState>();
   String _myValue;
   String url;
+  final FirebaseAuth _firebaseAuth=FirebaseAuth.instance;
+String postId = Uuid().v4();
+String userId;
+
+
+
 
   Future getImage()async
   {
@@ -45,22 +52,25 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
   {
     if(validateAndSave())
       {
+        FirebaseUser user = await _firebaseAuth.currentUser();
      final StorageReference postImageRef = FirebaseStorage.instance
             .ref()
             .child('Post Images');
      var timeKey = DateTime.now();
-     final StorageUploadTask uploadTask=postImageRef.child(timeKey.toString() + ".jpg").putFile(sampleImage);
+     final StorageUploadTask uploadTask=postImageRef.child(postId +".jpg").putFile(sampleImage);
 
      var imageUrl = await(await uploadTask.onComplete).ref.getDownloadURL();
      url=imageUrl.toString();
      print('Image url =' + url);
+    userId=user.uid;
      goToHomePage();
      saveToDataBase(url);
       }
   }
 
-  void saveToDataBase(url)
+  void saveToDataBase(url)async
   {
+    FirebaseUser user = await _firebaseAuth.currentUser();
     var dbTimeKey = DateTime.now();
     var formatDate= DateFormat('MMM d,yyyy');
     var formatTime= DateFormat('EEEE, hh:mm aaa');
@@ -72,16 +82,22 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
           'image':url,
           'description':_myValue,
           'date':date,
-          'time':time
+          'time':time,
+            'postId':postId
+
         };
-    ref.child('Posts').push().set(data);
+    ref.child('Posts').child(postId).set(data);
+
   }
 
   void goToHomePage()
   {
+
+
     Navigator.push(context, MaterialPageRoute(builder: (context){
       return HomePage();
     }));
+
   }
 
   @override

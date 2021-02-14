@@ -5,7 +5,8 @@ import 'package:memories/dialogBox.dart';
 class LoginRegisterPage extends StatefulWidget {
 final AuthImplementation auth;
 final VoidCallback onSignedIn;
-  LoginRegisterPage({this.auth,this.onSignedIn});
+
+  LoginRegisterPage({this.auth,this.onSignedIn,});
 
   @override
   _LoginRegisterPageState createState() => _LoginRegisterPageState();
@@ -77,7 +78,9 @@ String _password='';
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar:  new AppBar(
-         title: Center(child: Text('Flutter Memory App')),
+         title: Center(child: Text(' Memories',style: TextStyle(
+             fontWeight: FontWeight.bold,fontFamily: 'Signatra',fontSize: 45
+         ),)),
           ),
       body:Container(
         margin: EdgeInsets.all(15.0),

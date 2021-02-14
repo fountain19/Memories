@@ -22,7 +22,7 @@ class Auth implements AuthImplementation
     )).user;
     return user.uid;
   }
-  Future<String> SignUp(String email,String password)async
+  Future<String> SignUp(String email,String password) async
   {
     FirebaseUser user = (await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
@@ -39,6 +39,8 @@ class Auth implements AuthImplementation
 
   Future<void> SignOut()async
   {
-    _firebaseAuth.signOut();
+     _firebaseAuth.signOut();
+
   }
+
 }
